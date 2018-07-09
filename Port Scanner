@@ -1,0 +1,30 @@
+import socket
+#input IP address, ***only the address that we have permission to scan!
+my_IP = '192.168.243.1'
+#input list of port numbers that we would like to scan.
+port_List = [20, 21, 22, 23, 25, 53, 68, 69, 80, 110, 115, 119, 123, 135, 137,
+             139, 143, 161, 194, 311, 443, 445, 660, 993, 1023] 
+
+def pscan(portt):
+
+        try:
+            #Create a stream socket
+            #AF_INET is a Socket Family Function
+            #SOCKET_STREAM is Socket type TCP connections
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect((my_IP, portt))
+            return True
+
+        except:
+            return False
+            
+
+#write a for loop to check which port is being opened.
+        
+for i in port_List:
+
+        if pscan(i):
+            print('Port',i, "is open")
+        else:
+            print("port",i, "is closed")
+        # We can comment out the else part.
